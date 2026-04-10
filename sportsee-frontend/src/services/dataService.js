@@ -2,6 +2,8 @@ import { USER_ACTIVITY } from '../data/activity';
 import { USER_AVERAGE_SESSIONS } from '../data/averageSessions';
 import ActivityModel from '../models/ActivityModel';
 import AverageSessionsModel from '../models/AverageSessionsModel';
+import { USER_PERFORMANCE } from '../data/performance'; 
+import PerformanceModel from '../models/PerformanceModel';
 
 const USE_MOCK = true; 
 const BASE_URL = 'http://localhost:3000';
@@ -46,6 +48,26 @@ export const getUserAverageSessions = async (userId) => {
           return new AverageSessionsModel(json.data);
       } catch (error) {
           console.error("Erreur API Average Sessions :", error);
+      }
+  }
+};
+
+export const getUserPerformance = async (userId) => {
+  if (USE_MOCK) {
+      let performanceData;
+      if (Array.isArray(USER_PERFORMANCE)) {
+          performanceData = USER_PERFORMANCE.find(user => user.userId === parseInt(userId));
+      } else {
+          performanceData = USER_PERFORMANCE;
+      }
+      return new PerformanceModel(performanceData);
+  } else {
+      try {
+          const response = await fetch(`${BASE_URL}/user/${userId}/performance`);
+          const json = await response.json();
+          return new PerformanceModel(json.data);
+      } catch (error) {
+          console.error("Erreur API Performance :", error);
       }
   }
 };

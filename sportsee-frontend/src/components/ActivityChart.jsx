@@ -39,12 +39,13 @@ function ActivityChart({ data }) {
           />
 
           <Tooltip content={<ActivityTooltip />} />
-          
+
           <Bar
             yAxisId="kg"
             dataKey="kilogram"
             fill="#282D30" 
             radius={[10, 10, 0, 0]}
+            barSize={7}
           />
 
           <Bar
@@ -52,6 +53,7 @@ function ActivityChart({ data }) {
             dataKey="calories"
             fill="#E60000" 
             radius={[10, 10, 0, 0]}
+            barSize={7}
           />
         </BarChart>
       </ResponsiveContainer>
