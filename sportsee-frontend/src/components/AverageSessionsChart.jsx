@@ -1,4 +1,5 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import AverageSessionsTooltip from './AverageSessionsTooltip';
 
 function AverageSessionsChart({ data }) {
   if (!data || data.length === 0) return null;
@@ -28,7 +29,10 @@ function AverageSessionsChart({ data }) {
           />
           {/* On cache l'axe Y car il n'apparaît pas sur la maquette */}
           <YAxis hide domain={['dataMin - 10', 'dataMax + 10']} />
-          <Tooltip />
+          <Tooltip 
+            content={<AverageSessionsTooltip />} 
+            cursor={false} 
+          />
           <Line 
             type="monotone" 
             dataKey="sessionLength" 
