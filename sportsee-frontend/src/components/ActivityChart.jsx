@@ -1,6 +1,5 @@
 // src/components/ActivityChart.jsx
 import ActivityTooltip from "./ActivityTooltip";
-
 import {
   BarChart,
   Bar,
@@ -11,13 +10,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { USER_ACTIVITY } from "../data/activity";
-
-function ActivityChart() {
-  const data = USER_ACTIVITY.sessions.map((session, index) => ({
-    ...session,
-    day: index + 1, // affichage 1 → 7 au lieu de la date
-  }));
+function ActivityChart({ data }) {
+  // On s'assure que data existe avant de rendre le graphique
+  if (!data || data.length === 0) return null; 
 
   return (
     <div style={{ width: "100%", height: 300 }}>
@@ -44,16 +39,18 @@ function ActivityChart() {
           />
 
           <Tooltip content={<ActivityTooltip />} />
-
+          
           <Bar
             yAxisId="kg"
             dataKey="kilogram"
+            fill="#282D30" 
             radius={[10, 10, 0, 0]}
           />
 
           <Bar
             yAxisId="cal"
             dataKey="calories"
+            fill="#E60000" 
             radius={[10, 10, 0, 0]}
           />
         </BarChart>
