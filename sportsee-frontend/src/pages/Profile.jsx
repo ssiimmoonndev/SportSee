@@ -1,34 +1,41 @@
 import { useState, useEffect } from 'react';
-import { getUserActivity } from '../services/dataService';
+import { getUserActivity, getUserAverageSessions } from '../services/dataService';
 import ActivityChart from '../components/ActivityChart';
+import AverageSessionsChart from '../components/AverageSessionsChart';
 
 function Profile() {
-    // On crée un état local pour stocker nos données d'activité
     const [activityData, setActivityData] = useState(null);
+    const [sessionsData, setSessionsData] = useState(null); // Nouvel état !
     
-    // Pour l'instant, on met l'ID 12 "en dur". Plus tard, ça viendra de l'URL (avec React Router)
     const userId = 12; 
 
-    // On va chercher les données au chargement du composant
     useEffect(() => {
-        const fetchActivity = async () => {
-            const data = await getUserActivity(userId);
-            setActivityData(data);
+        const fetchAllData = async () => {
+            // On récupère l'activité (BarChart)
+            const activity = await getUserActivity(userId);
+            setActivityData(activity);
+            
+            // On récupère les sessions moyennes (LineChart)
+            const sessions = await getUserAverageSessions(userId);
+            setSessionsData(sessions);
         };
         
-        fetchActivity();
+        fetchAllData();
     }, [userId]);
 
     return (
-        <div>
+        <div style={{ padding: '20px' }}>
             <h1>Profil</h1>
-            {/* On s'assure que activityData n'est pas null avant d'afficher le graphique, 
-                et on lui passe la propriété "sessions" formatée par notre Modèle ! */}
-            {activityData ? (
-                <ActivityChart data={activityData.sessions} />
-            ) : (
-                <p>Chargement des données...</p>
-            )}
+            
+            {/* Graphique 1 : Activité */}
+            <div style={{ marginBottom: '30px' }}>
+                {activityData ? <ActivityChart data={activityData.sessions} /> : <p>Chargement activité...</p>}
+            </div>
+
+            {/* Graphique 2 : Sessions Moyennes */}
+            <div>
+                {sessionsData ? <AverageSessionsChart data={sessionsData.sessions} /> : <p>Chargement sessions...</p>}
+            </div>
         </div>
     );
 }
