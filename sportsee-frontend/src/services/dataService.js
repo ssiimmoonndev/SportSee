@@ -4,6 +4,8 @@ import ActivityModel from '../models/ActivityModel';
 import AverageSessionsModel from '../models/AverageSessionsModel';
 import { USER_PERFORMANCE } from '../data/performance'; 
 import PerformanceModel from '../models/PerformanceModel';
+import { USER_MAIN_DATA } from '../data/user'; // (Vérifie que ton fichier s'appelle bien user.js)
+import UserModel from '../models/UserModel';
 
 const USE_MOCK = true; 
 const BASE_URL = 'http://localhost:3000';
@@ -70,4 +72,24 @@ export const getUserPerformance = async (userId) => {
           console.error("Erreur API Performance :", error);
       }
   }
+};
+
+export const getUserMainData = async (userId) => {
+    if (USE_MOCK) {
+        let mainData;
+        if (Array.isArray(USER_MAIN_DATA)) {
+            mainData = USER_MAIN_DATA.find(user => user.id === parseInt(userId));
+        } else {
+            mainData = USER_MAIN_DATA;
+        }
+        return new UserModel(mainData);
+    } else {
+        try {
+            const response = await fetch(`${BASE_URL}/user/${userId}`);
+            const json = await response.json();
+            return new UserModel(json.data);
+        } catch (error) {
+            console.error("Erreur API Main Data :", error);
+        }
+    }
 };
