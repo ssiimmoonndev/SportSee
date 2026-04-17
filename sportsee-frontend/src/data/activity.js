@@ -1,5 +1,3 @@
-// src/data/activity.js
-
 export const USER_ACTIVITY = {
   userId: 12,
   sessions: [

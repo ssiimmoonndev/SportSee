@@ -1,5 +1,3 @@
-// src/data/performance.js
-
 export const USER_PERFORMANCE = {
   userId: 12,
   kind: {

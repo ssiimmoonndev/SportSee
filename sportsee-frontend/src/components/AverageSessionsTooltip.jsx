@@ -1,5 +1,5 @@
 export default function AverageSessionsTooltip({ active, payload }) {
-  // Si le tooltip est actif et qu'il y a des données à afficher
+
   if (active && payload && payload.length) {
     return (
       <div style={{ 
@@ -9,7 +9,6 @@ export default function AverageSessionsTooltip({ active, payload }) {
         fontSize: '12px',
         fontWeight: '500'
       }}>
-        {/* On récupère la valeur (la durée) et on ajoute " min" */}
         {`${payload[0].value} min`}
       </div>
     );

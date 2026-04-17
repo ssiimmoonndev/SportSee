@@ -1,9 +1,11 @@
 export default class UserModel {
   constructor(data) {
       this.id = data.id;
-      this.userInfos = data.userInfos;
-      // Standardisation : on prend 'score', et s'il n'existe pas, on "fallback" sur 'todayScore'
-      this.score = data.score || data.todayScore;
+      this.firstName = data.userInfos.firstName; 
+      
+      const rawScore = data.score || data.todayScore || 0;
+      this.score = rawScore * 100;
+      
       this.keyData = data.keyData;
   }
 }

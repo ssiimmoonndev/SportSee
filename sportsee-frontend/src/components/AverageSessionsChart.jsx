@@ -27,7 +27,6 @@ function AverageSessionsChart({ data }) {
             tickLine={false} 
             tick={{ fill: 'rgba(255,255,255,0.5)', fontSize: 12 }} 
           />
-          {/* On cache l'axe Y car il n'apparaît pas sur la maquette */}
           <YAxis hide domain={['dataMin - 10', 'dataMax + 10']} />
           <Tooltip 
             content={<AverageSessionsTooltip />} 

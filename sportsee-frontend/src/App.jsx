@@ -1,11 +1,22 @@
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import Profile from './pages/Profile';
-import './App.css'; // Si tu as du CSS global
 
 function App() {
   return (
-    <div>
-      {/* C'est la page Profile qui doit être affichée, car c'est elle qui va chercher les données */}
-      <Profile />
+    <div style={{ margin: 0, padding: 0, fontFamily: 'Roboto, sans-serif' }}>
+
+      <Header />
+
+      <div style={{ display: 'flex' }}>
+        
+        <Sidebar />
+
+        <div style={{ flex: 1, overflowX: 'hidden' }}>
+          <Profile />
+        </div>
+
+      </div>
     </div>
   );
 }

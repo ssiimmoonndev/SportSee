@@ -1,5 +1,3 @@
-// src/components/ActivityTooltip.jsx
-
 function ActivityTooltip({ active, payload }) {
   if (active && payload && payload.length) {
     return (

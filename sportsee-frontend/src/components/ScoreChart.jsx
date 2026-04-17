@@ -1,7 +1,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 function ScoreChart({ score }) {
-  // On prépare les données : une part pour le score, une part pour le reste (vide)
+
   const data = [
     { value: score },
     { value: 100 - score },
@@ -26,7 +26,6 @@ function ScoreChart({ score }) {
         Score
       </h2>
 
-      {/* Le texte au centre du cercle */}
       <div style={{
         position: 'absolute',
         top: '50%',
@@ -46,7 +45,7 @@ function ScoreChart({ score }) {
             dataKey="value"
             innerRadius={70}
             outerRadius={80}
-            startAngle={90} // Pour commencer en haut
+            startAngle={90}
             endAngle={450}
             cornerRadius={10}
           >
@@ -54,7 +53,6 @@ function ScoreChart({ score }) {
             <Cell fill="transparent" stroke="none" />
           </Pie>
           
-          {/* Un deuxième cercle blanc en dessous pour faire le fond du trou */}
           <Pie
             data={[{ value: 1 }]}
             dataKey="value"
