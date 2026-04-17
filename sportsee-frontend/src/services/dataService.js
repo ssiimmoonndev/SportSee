@@ -4,21 +4,19 @@ import ActivityModel from '../models/ActivityModel';
 import AverageSessionsModel from '../models/AverageSessionsModel';
 import { USER_PERFORMANCE } from '../data/performance'; 
 import PerformanceModel from '../models/PerformanceModel';
-import { USER_MAIN_DATA } from '../data/user'; // (Vérifie que ton fichier s'appelle bien user.js)
+import { USER_MAIN_DATA } from '../data/user';
 import UserModel from '../models/UserModel';
 
-const USE_MOCK = true; 
+const USE_MOCK = false; 
 const BASE_URL = 'http://localhost:3000';
 
 export const getUserActivity = async (userId) => {
     if (USE_MOCK) {
         let activityData;
 
-        // On vérifie si ton mock est un tableau (plusieurs utilisateurs) ou un objet simple (ton fichier actuel)
         if (Array.isArray(USER_ACTIVITY)) {
             activityData = USER_ACTIVITY.find(user => user.userId === parseInt(userId));
         } else {
-            // Si c'est un objet direct comme maintenant, on le prend tel quel !
             activityData = USER_ACTIVITY;
         }
 

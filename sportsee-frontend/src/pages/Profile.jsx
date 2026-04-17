@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { 
     getUserActivity, 
     getUserAverageSessions, 
@@ -23,7 +24,8 @@ function Profile() {
     const [sessionsData, setSessionsData] = useState(null);
     const [performanceData, setPerformanceData] = useState(null);
     
-    const userId = 12; 
+    const { id: userId } = useParams(); 
+    console.log("L'ID demandé par l'URL est :", userId);
 
     useEffect(() => {
         const fetchAllData = async () => {
